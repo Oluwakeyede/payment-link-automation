@@ -57,29 +57,6 @@ def log_payment_to_sheet(email, amount_naira, reference):
     worksheet.append_row(row)
     print("Logged to Google Sheet successfully!")
 
-def sync_pending_payments():
-    worksheet = get_worksheet()
-    all_rows = worksheet.get_all_values()
-    if not all_rows:
-        print("Sheet is empty, nothing to sync.")
-        return
-    header = all_rows[0]
-    status_col_index = header.index("Status") + 1
-    reference_col_index = header.index("Reference") + 1
-    updated_count = 0
-    for row_number, row in enumerate(all_rows[1:], start=2):
-        status = row[status_col_index - 1]
-        reference = row[reference_col_index - 1]
-        if status != "Pending":
-            continue
-        real_status = check_transaction_status(reference)
-        if real_status and real_status != "Pending":
-            worksheet.update_cell(row_number, status_col_index, real_status)
-            updated_count += 1
-            print(f"Updated {reference}: {real_status}")
-    print(f"Sync complete. {updated_count} row(s) updated.")
-
-
 def generate_payment_link(email, amount_naira):
     """
     Generates a Paystack payment link for a given customer email and amount,
