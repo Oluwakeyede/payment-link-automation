@@ -7,7 +7,6 @@ from dotenv import load_dotenv
 
 # ============ PAYSTACK SETUP ============
 load_dotenv()
-
 PAYSTACK_SECRET_KEY = os.environ.get("PAYSTACK_SECRET_KEY")  # swap to sk_live_ when ready
 
 # ============ GOOGLE SHEETS SETUP ============
