@@ -3,9 +3,12 @@ import gspread
 import os
 from google.oauth2.service_account import Credentials
 from datetime import datetime
+from dotenv import load_dotenv
 
 # ============ PAYSTACK SETUP ============
-PAYSTACK_SECRET_KEY = "sk_test_690d3c0d12e2282b3c2c3853110661e82bbc3e2e"  # swap to sk_live_ when ready
+load_dotenv()
+
+PAYSTACK_SECRET_KEY = os.environ.get("PAYSTACK_SECRET_KEY")  # swap to sk_live_ when ready
 
 # ============ GOOGLE SHEETS SETUP ============
 # This figures out the exact folder THIS script lives in, no matter
